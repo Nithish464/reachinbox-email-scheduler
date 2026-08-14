@@ -16,6 +16,7 @@ export const env = {
 
   DATABASE_URL: required("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/reachinbox"),
 
+  REDIS_URL: process.env.REDIS_URL ?? undefined,
   REDIS_HOST: process.env.REDIS_HOST ?? "localhost",
   REDIS_PORT: parseInt(process.env.REDIS_PORT ?? "6379", 10),
   REDIS_PASSWORD: process.env.REDIS_PASSWORD ?? undefined,
