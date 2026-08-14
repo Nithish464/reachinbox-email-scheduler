@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Environment variables (contains real secrets - never commit)
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+.next/
+out/
+build/
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs
+npm-debug.log*
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+
+# Test artifacts (if any leftover from local testing)
+test-*.ts
+test-*.js
