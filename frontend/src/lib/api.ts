@@ -1,4 +1,8 @@
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+// All requests are relative paths ("/api/...") that Next.js rewrites
+// (see next.config.js) proxy server-side to the real backend. This keeps
+// every browser-facing request on this same origin, so the session
+// cookie is first-party and doesn't get blocked by browsers' increasingly
+// strict cross-site cookie rules.
 
 class ApiError extends Error {
   status: number;
@@ -9,7 +13,7 @@ class ApiError extends Error {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
+  const res = await fetch(path, {
     ...init,
     credentials: "include",
     headers: {
@@ -35,7 +39,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 export const api = {
   me: () => request<{ user: import("@/types/api").AppUser }>("/api/auth/me"),
   logout: () => request<{ ok: boolean }>("/api/auth/logout", { method: "POST" }),
-  loginUrl: () => `${API_BASE}/api/auth/google`,
+  loginUrl: () => "/api/auth/google",
 
   senders: () => request<{ senders: import("@/types/api").Sender[] }>("/api/emails/senders"),
 
