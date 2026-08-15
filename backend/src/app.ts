@@ -8,6 +8,7 @@ import emailRoutes from "./routes/emailRoutes";
 
 export function createApp() {
   const app = express();
+  app.set("trust proxy", 1);
 
   app.use(express.json({ limit: "2mb" }));
   app.use(
@@ -22,7 +23,8 @@ export function createApp() {
       name: "reachinbox.sid",
       keys: [env.SESSION_SECRET],
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: "lax",
+      sameSite: env.NODE_ENV === "production" ? "none" : "lax",
+      secure: env.NODE_ENV === "production",
     })
   );
 
