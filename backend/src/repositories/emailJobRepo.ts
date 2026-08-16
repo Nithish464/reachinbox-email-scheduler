@@ -111,7 +111,7 @@ export async function updateJobStatus(
 
 export async function findPendingJobs(): Promise<EmailJob[]> {
   const { rows } = await pool.query(
-    `SELECT * FROM email_jobs WHERE status IN ('SCHEDULED','QUEUED','DELAYED') ORDER BY scheduled_time ASC`
+    `SELECT * FROM email_jobs WHERE status IN ('SCHEDULED','QUEUED','DELAYED','SENDING') ORDER BY scheduled_time ASC`
   );
   return rows.map(mapJob);
 }
